@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "main": "./dist/index",
   "typings": "./dist/",
-  "author": "",
-  "license": "MIT",
-  "private": true,
+  "author": "heliujie",
   "repository": {
     "url": "https://github.com/JieLiuRiver/swagger-axios-codegen",
     "type": "git"
