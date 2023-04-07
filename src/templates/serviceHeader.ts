@@ -1,14 +1,14 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { ISwaggerOptions } from "../baseInterfaces";
-import { abpGenericTypeDefinition, universalGenericTypeDefinition } from './genericTypeDefinitionTemplate';
-import { trimString } from '../utils';
+import { ISwaggerOptions } from '../baseInterfaces'
+import { abpGenericTypeDefinition, universalGenericTypeDefinition } from './genericTypeDefinitionTemplate'
 
 export function serviceHeader(options: ISwaggerOptions) {
   const classTransformerImport = options.useClassTransformer
     ? `import { Expose, Transform, Type, plainToClass } from 'class-transformer';
-  ` : '';
-  return `/** Generate by swagger-axios-codegen */
+  `
+    : ''
+  return `/** Generate by swagger-axios-code-generate */
   /* eslint-disable */
   // @ts-nocheck
   import axiosStatic, { AxiosInstance, AxiosRequestConfig } from 'axios';
@@ -38,20 +38,19 @@ export function serviceHeader(options: ISwaggerOptions) {
   }
 
   ${requestHeader()}
-  `;
+  `
 }
 
 export function disableLint() {
-  return `/** Generate by swagger-axios-codegen */
+  return `/** Generate by swagger-axios-code-generate */
   // @ts-nocheck
 /* eslint-disable */
   
-`}
-
+`
+}
 
 export function customerServiceHeader(options: ISwaggerOptions) {
-
-  return `/** Generate by swagger-axios-codegen */
+  return `/** Generate by swagger-axios-code-generate */
   // @ts-nocheck
   /* eslint-disable */
   export interface IRequestOptions {
@@ -108,16 +107,15 @@ function requestHeader() {
 
   // Instance selector
   export function axios(configs: IRequestConfig, resolve: (p: any) => void, reject: (p: any) => void): Promise<any> {
-    if (serviceOptions.axios) {
-      return serviceOptions.axios.request(configs).then(res => {
-        resolve(res.data);
-      })
-        .catch(err => {
-          reject(err);
-        });
-    } else {
-      throw new Error('please inject yourself instance like axios  ')
+    if (!serviceOptions.axios) {
+      serviceOptions.axios = axiosStatic;
     }
+    return serviceOptions.axios.request(configs).then(res => {
+      resolve(res.data);
+    })
+      .catch(err => {
+        reject(err);
+      });
   }
   
   export function getConfigs(method: string, contentType: string, url: string,options: any):IRequestConfig {

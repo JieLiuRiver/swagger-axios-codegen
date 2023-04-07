@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import * as util from 'util'
 import prettier from 'prettier'
 import axios from 'axios'
 import pascalcase from 'pascalcase'
@@ -15,10 +16,13 @@ import {
   typeTemplate
 } from './templates/template'
 import { customerServiceHeader, serviceHeader, definitionHeader, disableLint } from './templates/serviceHeader'
-import { isOpenApi3, findDeepRefs, setDefinedGenericTypes, getDefinedGenericTypes, trimString } from './utils'
+import { isOpenApi3, findDeepRefs, setDefinedGenericTypes, getDefinedGenericTypes, trimString, getFilesInFolder } from './utils'
 import { requestCodegen, IRequestClass, IRequestMethods } from './requestCodegen'
 import { componentsCodegen } from './componentsCodegen'
 import { definitionsCodeGen } from './definitionCodegen'
+
+
+const copyFilePromise = util.promisify(fs.copyFile);
 
 const defaultOptions: ISwaggerOptions = {
   serviceNameSuffix: 'Service',
@@ -137,7 +141,9 @@ export async function codegen(params: ISwaggerOptions) {
 
       text = disableLint() + text
       text = serviceTemplate(className + options.serviceNameSuffix, text, uniqueImports)
-      writeFile(options.outputDir || '', className + 'Service.ts', format(text, options))
+      writeFile(options.outputDir || '', className + 'Service.ts', format(text, options));
+
+
     })
 
     let defsString = ''
@@ -192,6 +198,10 @@ export async function codegen(params: ISwaggerOptions) {
   }
   if (fs.existsSync(swaggerSpecFileName)) {
     fs.unlinkSync(swaggerSpecFileName)
+  }
+  const files = await getFilesInFolder(path.join(__dirname, '../', 'templateFiles'))
+  for (let file of files) {
+    await copyFilePromise(file.file_ab_path, path.join(options.outputDir, file.name))
   }
   console.timeEnd('finish')
   if (err) {
