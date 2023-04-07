@@ -1,11 +1,7 @@
-# swagger-axios-codegen
+# swagger-axios-code-generate
 A swagger client uses axios and typescript
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/manweill/swagger-axios-codegen/NodeCI)](https://img.shields.io/github/workflow/status/manweill/swagger-axios-codegen/NodeCI)
-￼[![NpmVersion](https://img.shields.io/npm/v/swagger-axios-codegen.svg)](https://www.npmjs.com/package/swagger-axios-codegen)
-￼[![npm](https://img.shields.io/npm/dm/swagger-axios-codegen.svg)](https://www.npmjs.com/package/swagger-axios-codegen)
-[![open issues](https://img.shields.io/github/issues-raw/manweill/swagger-axios-codegen.svg)](https://img.shields.io/github/issues-raw/manweill/swagger-axios-codegen.svg)
-
+Modify according to [swagger-axios-codegen](https://www.npmjs.com/package/swagger-axios-codegen)
 
 require node > v8.0.0
 
@@ -29,7 +25,7 @@ By the way. you can support this repo via Star star sta st s... ⭐️ ⭐️ �
 ## Get Started
 
 ```
-  yarn add swagger-axios-codegen
+  yarn add swagger-axios-code-generate
 ```
 
 ```js
@@ -98,7 +94,7 @@ const defaultOptions: ISwaggerOptions = {
 
 ```js 
 
-const { codegen } = require('swagger-axios-codegen')
+const { codegen } = require('swagger-axios-code-generate')
 codegen({
   methodNameMode: 'operationId',
   source: require('./swagger.json')
@@ -110,7 +106,7 @@ codegen({
 ### use remote swagger api json
 ```js 
 
-const { codegen } = require('swagger-axios-codegen')
+const { codegen } = require('swagger-axios-code-generate')
 codegen({
   methodNameMode: 'operationId',
   remoteUrl:'You remote Url'
@@ -247,7 +243,7 @@ If a `class-transformer` is enabled and a format is set on a string, the result 
 
 ```js
 
-const { codegen } = require('swagger-axios-codegen')
+const { codegen } = require('swagger-axios-code-generate')
 codegen({
   methodNameMode: 'operationId',
   source:require('./swagger.json'),
@@ -313,15 +309,11 @@ At the moment there are only two rules are supported - `required` and `maxLength
 
 ## Some Solution
 
-### 1.Reference parameters
 
-see in [#53](https://github.com/Manweill/swagger-axios-codegen/issues/53), use package [json-schema-ref-parser](https://github.com/APIDevTools/json-schema-ref-parser)
-
-
-### 2.With `Microservice Gateway`
+### 1.With `Microservice Gateway`
 
 ```js
-const {codegen} = require('swagger-axios-codegen')
+const {codegen} = require('swagger-axios-code-generate')
 const axios = require('axios')
 // host 地址
 const host = 'http://your-host-name'

@@ -23,7 +23,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install and build swagger-axios-codegen
+    - name: npm install and build swagger-axios-code-generate
       run: |
         npm install
         npm run build

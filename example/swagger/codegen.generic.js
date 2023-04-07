@@ -1,4 +1,4 @@
-// const { codegen } = require('swagger-axios-codegen')
+// const { codegen } = require('swagger-axios-code-generate')
 const { codegen } = require('../../dist/index.js')
 
 codegen({

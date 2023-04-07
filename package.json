@@ -1,12 +1,13 @@
 {
-  "name": "swagger-axios-codegen",
-  "version": "0.15.11",
+  "name": "swagger-axios-code-generate",
+  "version": "0.0.1",
   "main": "./dist/index",
   "typings": "./dist/",
-  "author": "Manwei Leung <mic.liangwenwei@foxmail.com>",
+  "author": "",
   "license": "MIT",
+  "private": true,
   "repository": {
-    "url": "https://github.com/Manweill/swagger-axios-codegen.git",
+    "url": "https://github.com/JieLiuRiver/swagger-axios-codegen",
     "type": "git"
   },
   "keywords": [
@@ -32,6 +33,10 @@
     "prettier": "^1.15.2",
     "structured-log": "^0.2.0"
   },
+  "files": [
+    "dist",
+    "templateFiles"
+  ],
   "devDependencies": {
     "@types/node": "16",
     "@types/prettier": "^1.12.2",

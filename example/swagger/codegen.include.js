@@ -1,4 +1,4 @@
-// const { codegen } = require('swagger-axios-codegen')
+// const { codegen } = require('swagger-axios-code-generate')
 const { codegen } = require('../../dist/index.js')
 
 let include = [
@@ -10,7 +10,7 @@ let include = [
   '*',
   // 'Products*',
   '!Products',
-  { 'User': ['*', '!history'] },
+  { User: ['*', '!history'] }
 ]
 codegen({
   methodNameMode: 'path',
